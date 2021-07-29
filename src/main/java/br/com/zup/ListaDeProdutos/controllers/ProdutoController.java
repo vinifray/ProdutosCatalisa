@@ -5,6 +5,7 @@ import br.com.zup.ListaDeProdutos.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -13,9 +14,11 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
-
+    /*
+    metodo com @Valid para que o controller faça a validação do codigo
+     */
     @PostMapping
-    public List<ProdutoDTO> cadastrarProduto(@RequestBody ProdutoDTO produtoDTO){
+    public List<ProdutoDTO> cadastrarProduto(@RequestBody @Valid ProdutoDTO produtoDTO){
         produtoService.adicionarProdutoNoEstoque(produtoDTO);
         return produtoService.retornarEstoque();
     }

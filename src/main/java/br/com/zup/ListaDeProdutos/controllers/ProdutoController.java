@@ -3,7 +3,9 @@ package br.com.zup.ListaDeProdutos.controllers;
 import br.com.zup.ListaDeProdutos.dtos.ProdutoDTO;
 import br.com.zup.ListaDeProdutos.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,7 +21,11 @@ public class ProdutoController {
      */
     @PostMapping
     public List<ProdutoDTO> cadastrarProduto(@RequestBody @Valid ProdutoDTO produtoDTO){
-        produtoService.adicionarProdutoNoEstoque(produtoDTO);
+       try{
+           produtoService.adicionarProdutoNoEstoque(produtoDTO);
+       }catch (RuntimeException erro){
+           throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, erro.getMessage());
+       }
         return produtoService.retornarEstoque();
     }
 

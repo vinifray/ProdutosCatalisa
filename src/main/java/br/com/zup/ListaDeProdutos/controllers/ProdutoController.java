@@ -24,6 +24,10 @@ public class ProdutoController {
        try{
            produtoService.adicionarProdutoNoEstoque(produtoDTO);
        }catch (RuntimeException erro){
+           /*
+           ResponseStatusException é uma exceção que deve ser usada somente no controlador
+           Ele serve para levar erros para o cliente.
+            */
            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, erro.getMessage());
        }
         return produtoService.retornarEstoque();

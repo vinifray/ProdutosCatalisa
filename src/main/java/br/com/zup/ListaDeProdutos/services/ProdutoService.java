@@ -14,4 +14,8 @@ public class ProdutoService {
     public void adicionarProdutoNoEstoque(ProdutoDTO produtoDTO){
         estoque.add(produtoDTO);
     }
+
+    public List<ProdutoDTO> retornarEstoque(){
+        return this.estoque;
+    }
 }

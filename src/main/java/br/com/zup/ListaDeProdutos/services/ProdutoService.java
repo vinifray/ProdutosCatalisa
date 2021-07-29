@@ -11,4 +11,7 @@ public class ProdutoService {
 
     private List<ProdutoDTO> estoque = new ArrayList<>();
 
+    public void adicionarProdutoNoEstoque(ProdutoDTO produtoDTO){
+        estoque.add(produtoDTO);
+    }
 }
